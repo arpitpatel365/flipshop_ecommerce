@@ -1,0 +1,38 @@
+body{
+    box-sizing: border-box;
+}
+
+
+.carousel-main{
+    padding: 0 !important;
+    
+}
+    
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    
+}
+
+.lowercase-button{
+    text-transform: capitalize !important;
+    font-size: 15px !important;
+}
+
+.product_name{
+    color: #000000;
+}
+
+/* @media only screen and (max-width: 575px) {
+    body{
+        background-color: yellow !important;
+
+    /* } */
+ 
+
+
+
+
+
+
