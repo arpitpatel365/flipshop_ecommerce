@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Space, Spin } from 'antd';
-import user from '../images/user.png'
 import Button from 'react-bootstrap/Button';
 import { GetUserProfile } from '../services/UserService';
+import Avatar from '@mui/material/Avatar';
 
 export const Profile = () => {
   const [data, setData] = useState([]);
@@ -56,7 +56,7 @@ export const Profile = () => {
           }
 
           else if (res.data.message === 'User Id Not Found') {
-            alert(`Seems user ID not found in system. Please create new account.`)
+            alert(`User ID not found in system. Please create new account.`)
             setIsLoaded(true)
           }
 
@@ -84,22 +84,19 @@ export const Profile = () => {
     <React.Fragment>
       {!isLoaded ? SpinLoad() :
       <div className='container my-5 border border-1 border border-success-subtle rounded'>
-        <br />
-
-        
           <>
-            <h2> <img src={user} alt='error' style={{ height: '40px' }} /> Profile Section</h2> <br />
+            <h2> Profile Section</h2> 
 
             <div className=''>
-
-              <img src={data.user_photo} alt='error' style={{ width: '200px' }} />  <br />
+          
+              <Avatar  src={data.user_photo==="https://akashsir.in/myapi/ecom1/upload/noimage.png" ? "/broken-image.jpg" :data.user_photo } sx={{ width: 96, height: 96 }} /> 
               Name : {data.user_name}  <br />
               Email ID : {data.user_email} <br />
               Mobile Number : {data.user_mobile} <br />
               Gender : {data.user_gender} <br />
               Address : {data.user_address} <br /><br />
             </div>
-            <Link to='/update-profile'>  <Button variant="primary">Update Profile</Button>{' '} </Link> <br /><br />
+            <Link to='/update-profile'>  <Button variant="primary">Edit Profile</Button>{' '} </Link> <br /><br />
             <Button variant="warning" onClick={handlePassword}>Change Password</Button>{' '}
           </>
       </div>
