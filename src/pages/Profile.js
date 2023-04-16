@@ -9,7 +9,7 @@ export const Profile = () => {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   let navigate = useNavigate();
-
+  
   const SpinLoad = () => (
     <Space
       direction="vertical"
@@ -49,10 +49,11 @@ export const Profile = () => {
       GetUserProfile(formData)
         .then((res) => {
           // success
-          console.log(res);
+          console.log(res?.data);
           if (res.data.flag === "1") {
             setData(res.data)
             setIsLoaded(true)
+            sessionStorage.setItem('user_details',JSON.stringify(res?.data))
           }
 
           else if (res.data.message === 'User Id Not Found') {
@@ -74,12 +75,13 @@ export const Profile = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  
 
   const handlePassword = () => {
     navigate('/change-password')
   }
 
-
+  
   return (
     <React.Fragment>
       {!isLoaded ? SpinLoad() :

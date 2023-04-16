@@ -91,7 +91,7 @@ const ViewOrder = () => {
             }
         }
     })
-    console.log(loading);
+    
     useEffect(() => {
         setLoading(true)
         let a = localStorage.getItem("Object");

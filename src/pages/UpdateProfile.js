@@ -37,13 +37,18 @@ const tailFormItemLayout = {
 };
 
 const UpdateProfile = () => {
+  let new_Item=(sessionStorage.getItem((('user_details'))));
+  let finalUserDetails=(JSON.parse(new_Item))
+  const {user_name,user_email,user_mobile,user_gender, user_address }=finalUserDetails  
+
   const [form] = Form.useForm();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [gender, setGender] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [address, setAddress] = useState('');
-  const navigate=useNavigate()
+  const [name, setName] = useState(user_name);
+  const [email, setEmail] = useState(user_email);
+  const [gender, setGender] = useState(user_gender);
+  const [mobile, setMobile] = useState(user_mobile);
+  const [address, setAddress] = useState(user_address);
+
+  const navigate = useNavigate()
   useEffect(() => {
     let obj = localStorage.getItem('Object')
     let ff = document.getElementById('OkSign')
@@ -56,7 +61,7 @@ const UpdateProfile = () => {
 
     return () => { }
   }, [])
-
+ 
 
   const onFinish = () => {
 
@@ -85,7 +90,7 @@ const UpdateProfile = () => {
       let obj = localStorage.getItem('Object')
       let a = JSON.parse(obj)
       let userID = a.user_id;
-     
+
       const data = {
         user_id: userID,
         user_name: name,
@@ -113,8 +118,8 @@ const UpdateProfile = () => {
         .catch((error) => {
           console.log(error)
         })
-      }
-    };
+    }
+  };
 
   const prefixSelector = (
 
@@ -146,6 +151,12 @@ const UpdateProfile = () => {
           initialValues={{
 
             prefix: '91',
+            name:name,
+            email:email,
+            mobile:mobile,
+            gender:gender,
+            address:address
+
           }}
           scrollToFirstError
 
@@ -164,13 +175,13 @@ const UpdateProfile = () => {
 
             rules={[
               {
-                required: true, 
+                required: true,
                 message: 'Please input your name!',
                 whitespace: true,
               },
             ]}
           >
-            <Input onChange={(e) => setName(e.target.value)} />
+            <Input onChange={(e) => setName(e.target.value)}  />
           </Form.Item>
 
           <Form.Item
@@ -190,7 +201,7 @@ const UpdateProfile = () => {
 
           >
 
-            <Input onChange={(e) => setEmail(e.target.value)} />
+            <Input onChange={(e) => setEmail(e.target.value)}  />
           </Form.Item>
 
           <Form.Item
@@ -205,10 +216,10 @@ const UpdateProfile = () => {
           >
             <Input
               addonBefore={prefixSelector}
-              style={{
-                width: '100%',
-              }} onChange={(e) => setMobile(e.target.value)}
-            />
+              style={{width: '100%',}} 
+              onChange={(e) => setMobile(e.target.value)}
+              />
+             
           </Form.Item>
 
           <Form.Item
@@ -221,7 +232,7 @@ const UpdateProfile = () => {
               },
             ]}
           >
-            <Select t placeholder="select your gender" onChange={(value) => { setGender(value) }} >
+            <Select placeholder="select your gender" onChange={(value) => { setGender(value) }}  >
               <Option value="male">Male</Option>
               <Option value="female">Female</Option>
               <Option value="other">Other</Option>
@@ -233,7 +244,7 @@ const UpdateProfile = () => {
             label="Address"
             rules={[{ required: true, message: 'Please input address.' }]}
           >
-            <Input.TextArea showCount maxLength={100} onChange={(e) => setAddress(e.target.value)} />
+            <Input.TextArea showCount maxLength={100} onChange={(e) => setAddress(e.target.value)}  />
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout} wrapperCol={{ offset: 0 }} >
@@ -243,6 +254,7 @@ const UpdateProfile = () => {
           </Form.Item>
         </Form>
       </div>
+      
     </React.Fragment>
   );
 };
