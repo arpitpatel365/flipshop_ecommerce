@@ -13,7 +13,7 @@ import Img5 from '../images/Img5.jpg'
 import Img6 from '../images/Img6.jpg'
 import Img7 from '../images/Img7.jpg'
 import { ShowAllProducts } from '../services/ProductService';
-
+import '../css/Common.css'
 
 export const ProductList = () => {
 
@@ -213,7 +213,7 @@ export const ProductList = () => {
                                             {item.product_details} <br />
                                             <span className='text-success'> <b> <span><img src={rupee} alt="error" /> </span> {item.product_price}</b>  </span>  <br />
 
-                                            <Link to={`/productdetails/${item.product_id}`}> <Button className="lowercase-button" variant="info">Shop</Button>{' '}</Link> <br /><br />
+                                            <Link to={`/productdetails/${item.product_id}`}> <Button className="lowercase-button commonBtn" variant="info">Shop</Button>{' '}</Link> <br /><br />
 
                                         </React.Fragment>
                                         : index === 2 || index === 5 || index === 10 ?

@@ -188,7 +188,7 @@ const ChangePassword = () => {
 
                 <Form.Item {...tailFormItemLayout}  wrapperCol={{offset:0,span:4}}>
                     <Button type="primary" htmlType="submit">
-                        Update Password
+                        Update password
                     </Button>
                 </Form.Item>
             </Form>

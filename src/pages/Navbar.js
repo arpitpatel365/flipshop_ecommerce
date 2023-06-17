@@ -106,11 +106,11 @@ export default function Navbar() {
                             }
                         }}>Profile</Link></li>
 
-                        <li id='logOut'>  <button className='logOutButton btn btn-danger' onClick={() => {
+                        <li id='logOut'>  <button className='logOutButton commonBtn btn btn-danger' onClick={() => {
                             handleOut()
                         }}
                         >
-                            Log Out</button> </li>
+                            Logout</button> </li>
                         <Link to='/update-profile'></Link>
                         <Link to='/change-password'></Link>
 

@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import empty_cart from '../images/empty_cart.jpg'
 import { DeleteProduct, getCartList } from '../services/ProductService';
 import Swal from 'sweetalert2';
+import '../css/Common.css'
 
 const ViewCart = () => {
     let navigate = useNavigate();
@@ -12,7 +13,7 @@ const ViewCart = () => {
     const [data2, setData2] = useState('')
     const [data3, setData3] = useState('')
     const [loaded, setLoaded] = useState(false)
-    
+
     const SpinLoad = () => (
         <Space
             direction="vertical"
@@ -36,47 +37,47 @@ const ViewCart = () => {
         const userID = {
             user_id: c
         };
-       
+
         Swal.fire({
             title: 'Are you sure you want to remove this product ?',
             showCancelButton: true,
             confirmButtonText: 'Delete',
         })
 
-        .then((result) => {
-            /* Read more about isConfirmed below */
-            if (result.isConfirmed) {
-                let data = {
-                    cart_id: cart_id
-                };
+            .then((result) => {
+                /* Read more about isConfirmed below */
+                if (result.isConfirmed) {
+                    let data = {
+                        cart_id: cart_id
+                    };
 
-                DeleteProduct(data)
-                    .then((res) => {
-                        console.log(res);
-                        
-                        if (res.data.flag === "1") {
-                            getCartList(userID)
-                            .then((res) => {
-                                console.log(res)
-                                console.log(res);
-                                setData1(res.data.cart_list)
-                                setData2(res.data.total_qty);
-                                setData3(res.data.grand_total)
-                                setLoaded(true)
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                                setLoaded(true)
-                            })
-                        }
-                    })
-                    
-                    .catch((error) => {
-                        //handle error
-                        console.log(error)
-                    })
-            }
-        })
+                    DeleteProduct(data)
+                        .then((res) => {
+                            console.log(res);
+
+                            if (res.data.flag === "1") {
+                                getCartList(userID)
+                                    .then((res) => {
+                                        console.log(res)
+                                        console.log(res);
+                                        setData1(res.data.cart_list)
+                                        setData2(res.data.total_qty);
+                                        setData3(res.data.grand_total)
+                                        setLoaded(true)
+                                    })
+                                    .catch((error) => {
+                                        console.log(error);
+                                        setLoaded(true)
+                                    })
+                            }
+                        })
+
+                        .catch((error) => {
+                            //handle error
+                            console.log(error)
+                        })
+                }
+            })
     }
 
     useEffect(() => {
@@ -122,14 +123,13 @@ const ViewCart = () => {
 
     return (
         <React.Fragment>
-            <br />
             {!loaded ? <h1>{SpinLoad()}</h1> :
                 <>
-                    {(!data1) ?
+                    {(data1.length===0) ?
                         <div className='container text-center'>
                             <img src={empty_cart} style={{ width: '55vh' }} className="img-fluid" alt="error" />
-                            <h3>Cart is empty !</h3> <br />
-                            <Link to='/productlist'><h3> Place your first order.</h3></Link>
+                            <h5>Your cart is empty!</h5> 
+                            <Button className='commonBtn' variant="primary" onClick={()=>navigate('/productlist')} ><h6>Shop now</h6></Button>{' '}
 
                         </div>
                         :
@@ -139,28 +139,27 @@ const ViewCart = () => {
 
                             <ul>  {data1 && data1.map((item) =>
                                 <div key={item.product_id}> <br />
-                                    {/* {item.cart_id}  <br/> */}
                                     {item.product_name} <br />
                                     <img src={item.product_image} alt='error' style={{ width: '200px' }} /> <br />
                                     Price : {item.product_price} <br />
                                     Quantity : {item.product_qty} <br />
 
-                                    <Button variant="danger" onClick={() => { handleDelete(item.cart_id) }} >Delete Product</Button>{' '}
+                                    <Button className='commonBtn' variant="danger" onClick={() => { handleDelete(item.cart_id) }} >Delete</Button>{' '}
 
 
                                 </div>
                             )} <br />
 
-                                Total Products : {data2} <br />
+                                 Total Products : {data2} <br />
                                 Grand Total : {data3}  <br /> <br />
-                                <Link to='/placeorder'> <Button variant="success">Place an order</Button>{' '}</Link>
+                                <Link to='/placeorder'> <Button className='commonBtn' variant="success">Place order</Button>{' '}</Link> 
                             </ul>
                         </>
                     }
                 </>
             }
-
         </React.Fragment>
+
     )
 }
 

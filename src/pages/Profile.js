@@ -4,6 +4,7 @@ import { Space, Spin } from 'antd';
 import Button from 'react-bootstrap/Button';
 import { GetUserProfile } from '../services/UserService';
 import Avatar from '@mui/material/Avatar';
+import '../css/Common.css'
 
 export const Profile = () => {
   const [data, setData] = useState([]);
@@ -98,8 +99,8 @@ export const Profile = () => {
               Gender : {data.user_gender} <br />
               Address : {data.user_address} <br /><br />
             </div>
-            <Link to='/update-profile'>  <Button variant="primary">Edit Profile</Button>{' '} </Link> <br /><br />
-            <Button variant="warning" onClick={handlePassword}>Change Password</Button>{' '}
+            <Link to='/update-profile'>  <Button className='commonBtn' variant="primary">Edit profile</Button>{' '} </Link> <br /><br />
+            <Button className='commonBtn' variant="warning" onClick={handlePassword}>Change password</Button>{' '}
           </>
       </div>
         }

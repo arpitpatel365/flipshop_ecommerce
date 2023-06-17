@@ -249,7 +249,7 @@ const UpdateProfile = () => {
 
           <Form.Item {...tailFormItemLayout} wrapperCol={{ offset: 0 }} >
             <Button type="primary" htmlType="submit" >
-              Update Profile
+              Update profile
             </Button>
           </Form.Item>
         </Form>

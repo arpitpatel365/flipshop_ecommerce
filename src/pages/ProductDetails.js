@@ -6,7 +6,7 @@ import { AddProductCart, GetProductdetails } from '../services/ProductService';
 import Swal from 'sweetalert2';
 import '../css/ProductDetails.css'
 import rupee from '../images/rupee.png'
-
+import '../css/Common.css'
 
 function ProductDetails() {
     let { id } = useParams();
@@ -89,7 +89,7 @@ function ProductDetails() {
                     Price : <b>{item.product_price} </b> <img src={rupee} alt='rupee logo'/> <br />
                     Description : {item.product_details} <br /> <br />
 
-                    <Button variant="info" onClick={() => { cartAdd(item.product_id) }}>Add to cart</Button>{' '}
+                    <Button className='commonBtn' variant="info" onClick={() => { cartAdd(item.product_id) }}>Add to cart</Button>{' '}
 
 
                 </div>
