@@ -131,7 +131,8 @@ const ViewOrder = () => {
                   
                 })
         }
-    }, [data.order_list, navigate])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
 
     return (

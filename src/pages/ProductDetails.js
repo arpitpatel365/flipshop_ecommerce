@@ -42,7 +42,8 @@ function ProductDetails() {
             })
 
         return () => { }
-    }, [id])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     const cartAdd = (product_id) => {
         let a1 = localStorage.getItem('Object')

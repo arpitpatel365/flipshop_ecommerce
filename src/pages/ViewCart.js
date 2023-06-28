@@ -133,12 +133,11 @@ const ViewCart = () => {
 
                         </div>
                         :
-                        <>
+                        <div>
+                        <div className='my-4 px-4'>
                             <h3>Products in your cart</h3>
-
-
-                            <ul>  {data1 && data1.map((item) =>
-                                <div key={item.product_id}> <br />
+                              {data1 && data1.map((item) =>
+                                <div key={item.product_id} className='my-3'> 
                                     {item.product_name} <br />
                                     <img src={item.product_image} alt='error' style={{ width: '200px' }} /> <br />
                                     Price : {item.product_price} <br />
@@ -148,13 +147,17 @@ const ViewCart = () => {
 
 
                                 </div>
-                            )} <br />
-
-                                 Total Products : {data2} <br />
-                                Grand Total : {data3}  <br /> <br />
-                                <Link to='/placeorder'> <Button className='commonBtn' variant="success">Place order</Button>{' '}</Link> 
-                            </ul>
-                        </>
+                            )}
+                            </div>
+                            
+                                <div className='my-4 px-4'>
+                                <div> Total Products : {data2} </div>
+                               <div> Grand Total : {data3}</div> 
+                               <div> <Link to='/placeorder'> <Button className='commonBtn my-2' variant="success">Place order</Button>{' '}</Link> </div>
+                                </div>
+                                
+                                </div>
+                        
                     }
                 </>
             }
