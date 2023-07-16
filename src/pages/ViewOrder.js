@@ -9,7 +9,7 @@ import '../css/ViewOrder.css'
 
 const ViewOrder = () => {
     const [data, setData] = useState([]);
-    const [loading,setLoading]=useState(false)
+    const [loading, setLoading] = useState(false)
     let navigate = useNavigate()
 
 
@@ -91,7 +91,7 @@ const ViewOrder = () => {
             }
         }
     })
-    
+
     useEffect(() => {
         setLoading(true)
         let a = localStorage.getItem("Object");
@@ -120,7 +120,7 @@ const ViewOrder = () => {
                         setData(res.data.order_list);
                         setLoading(false)
                     }
-                    else{
+                    else {
                         setLoading(false)
                     }
                 })
@@ -128,10 +128,10 @@ const ViewOrder = () => {
                 .catch(function (error) {
                     console.log(error)
                     setLoading(false)
-                  
+
                 })
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -143,102 +143,105 @@ const ViewOrder = () => {
 
             <div className="container my-1">
 
-                {loading ?  <h1>{SpinLoad()}</h1> :  
-                <>
-        
-                     {data.length===0 ?    <div className="container text-center">
+                {loading ? <h1>{SpinLoad()}</h1> :
+                    <>
+
+                        {data.length === 0 ? <div className="container text-center">
                             <img src={no_order} className='img-fluid' style={{ width: '650px' }} alt="no order img" />
                             <h5 className="no_order">You have not placed any order yet !</h5>
                         </div> : ""}
-                <div>
-                   
-
-
-
-                        <React.Fragment>
-                            {data.length>0 ? 
-                            <>
-                            <h2>Your orders</h2>   <br />
-                            <div className="table-responsive">
-
-                                <table className="">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Sr. No.</th>
-                                            <th scope="col">Order date</th>
-                                            <th scope="col">Order status</th>
-                                            <th scope="col">Total amount (Rs.)</th>
-                                            <th scope="col">Consignee name</th>
-                                            <th scope="col">Consignee address</th>
-                                            <th scope="col">Consignee mobile number</th>
-                                            <th scope="col">Payment method</th>
-                                            <th scope="col">Order details</th>
-
-                                        </tr>
-                                    </thead>
-                                    { data?.length>0 && data?.map((item, index) =>
-                                        <tbody key={item.order_id} >
-                                            <tr >
-
-                                                <th scope="row"> {index + 1} </th>
-                                                <td> {item.order_date} </td>
-                                                <td> <b className={item.order_status==="Cancelled" ? "Cancelled_order" : "pending_order"}>  {item.order_status}</b> </td>
-                                                <td> <b><img src={rupee} alt="error" /> {item.total_amount} </b></td>
-                                                <td>{item.shipping_name}</td>
-                                                <td>{item.shipping_address} </td>
-                                                <td>{item.shipping_mobile}</td>
-                                                <td> {item.payment_method} </td>
-
-                                                <td>
-
-                                                    {item.order_details.map((element, index) =>
-
-                                                        <div key={`${element}_${index}`} className='ok'>
-                                                            {index !== 0 ?
-                                                                <React.Fragment >
-                                                                    <img src={element.product_image} alt="error" style={{ width: '100px' }} /> <br />
-                                                                    <b>{element.product_name} </b>  <br />
-                                                                    Price : <b> {element.product_price}Rs. </b><br />
-                                                                    Quantity : <b> {element.product_qty}</b>
-                                                                </React.Fragment>
-                                                                : ""}
-                                                        </div>
-
-                                                    )
-                                                    }
-
-
-
-                                                    {item.order_status === 'Cancelled' ? "" :
-                                                        <>
-
-                                                            <button className="my-1 btn btn-outline-danger" onClick={() => handleCancel(item.order_id)}>Cancel</button>
-                                                            <br />
-                                                        </>
-                                                    }
-
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    )
-                                    }
-
-
-                                </table>
-                            </div> 
-                            </> :"" }
-                        </React.Fragment>
-
-                     
+                        <div>
 
 
 
 
-                </div>
-               
-                <br />
-                </>
-                    }
+                            <React.Fragment>
+                                {data.length > 0 ?
+                                    <>
+                                        <h2>Your orders</h2>   <br />
+                                        <div className="table-responsive">
+
+                                            <table className="">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Sr. No.</th>
+                                                        <th scope="col">Order date</th>
+                                                        <th scope="col">Order status</th>
+                                                        <th scope="col">Total amount (Rs.)</th>
+                                                        <th scope="col">Consignee name</th>
+                                                        <th scope="col">Consignee address</th>
+                                                        <th scope="col">Consignee mobile number</th>
+                                                        <th scope="col">Payment method</th>
+                                                        <th scope="col">Order details</th>
+
+                                                    </tr>
+                                                </thead>
+                                                {data?.length > 0 && data?.map((item, index) => {
+                                                    return (
+                                                        <tbody key={item.order_id} >
+                                                            <tr >
+
+                                                                <th scope="row"> {index + 1} </th>
+                                                                <td> {item.order_date} </td>
+                                                                <td> <b className={item.order_status === "Cancelled" ? "Cancelled_order" : "pending_order"}>  {item.order_status}</b> </td>
+                                                                <td> <b><img src={rupee} alt="error" /> {item.total_amount} </b></td>
+                                                                <td>{item.shipping_name}</td>
+                                                                <td>{item.shipping_address} </td>
+                                                                <td>{item.shipping_mobile}</td>
+                                                                <td> {item.payment_method} </td>
+
+                                                                <td>
+
+                                                                    {item?.order_details.map((element, index) => {
+                                                                        return (
+                                                                            <div key={`${element}_${index}`} className='ok'>
+
+                                                                                <React.Fragment >
+                                                                                    <img src={element.product_image} alt="error" style={{ width: '100px' }} /> <br />
+                                                                                    <b>{element.product_name} </b>  <br />
+                                                                                    Price : <b> {element.product_price}Rs. </b><br />
+                                                                                    Quantity : <b> {element.product_qty}</b>
+                                                                                </React.Fragment>
+
+                                                                            </div>)
+                                                                    }
+
+                                                                    )
+                                                                    }
+
+
+
+                                                                    {item.order_status === 'Cancelled' ? "" :
+                                                                        <>
+
+                                                                            <button className="my-1 btn btn-outline-danger" onClick={() => handleCancel(item.order_id)}>Cancel</button>
+                                                                            <br />
+                                                                        </>
+                                                                    }
+
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>)
+                                                }
+                                                )
+                                                }
+
+
+                                            </table>
+                                        </div>
+                                    </> : ""}
+                            </React.Fragment>
+
+
+
+
+
+
+                        </div>
+
+                        <br />
+                    </>
+                }
 
             </div>
         </React.Fragment>
